@@ -12,6 +12,7 @@ import "ace-builds/src-noconflict/ext-language_tools";
 import { MyContext } from "@/context/contextProvider";
 function App() {
   //context
+  const [flagwrite ,setFlagwrite] = useState(true)
   const {file , setFile} = useContext(MyContext)
   const [fileTree, setFileTree] = useState({});
   const [selectedFile, setSelectedFile] = useState("");
@@ -24,6 +25,28 @@ function App() {
     const finalItem = insertNode(explorerData, folderId, itemName, isFolder);
     return finalItem;
   };
+  //useeffect to check whether a file selected or not
+  useEffect( ()=>{
+   
+  
+
+
+      const fetchFileContent = async () => {
+        if (file) {
+          setFlagwrite(true);
+          // Fetch file data
+          const response = await fetch(`http://localhost:9000/files/content?path=${file}`);
+          const result = await response.json();
+          setSelectedFileContent(result.content);
+          setFlagwrite(false);
+        }
+      };
+      fetchFileContent();
+      
+     //fetch file data 
+    
+    
+  },[file])
   const handleDeleteNode = (folderId) => {
     // Call deleteNode to get the modified tree
     const finalItem = deleteNode(explorerData, folderId);
@@ -105,7 +128,7 @@ function App() {
   const getFileContents = useCallback(async () => {
     if (!selectedFile) return;
     const response = await fetch(
-      `http://localhost:9000/files/content?path=${selectedFile}`
+      `http://localhost:9000/files/content?path=${file}`
     );
     const result = await response.json();
     setSelectedFileContent(result.content);
@@ -150,6 +173,7 @@ function App() {
     //   </div>
     // </div>
     <>
+    <div className=" p-6  bg-zinc-600">
      <div className="App">
       <div className="folderContainerBody">
         <div className="folder-container">
@@ -161,16 +185,28 @@ function App() {
           />
         </div>
         <div className="empty-state bg-white text-blue-500">
-        <div className=" w-full flex flex-col  h-full ">
-        <div className=" bg-red-800  h-2/3 w-full">
-        <AceEditor value={code} onChange={(e) => setCode(e)} />
-          </div>
-          <div className="">
+        <div className=" w-full flex flex-col min-h-screen ">
+        
+       <div className="  p-5 bg-red-400 m-0">
+       <AceEditor 
+       readOnly={flagwrite}
+        mode="js"
+         value={code}
+         width="1500px"
+         height="600px"
+         fontSize={24}
+        theme="solarized dark"
+         editorProps={{ $blockScrolling: true }}
+          onChange={(e) => setCode(e)} />
+       </div>
+         
+          <div className=" drop-shadow-2xl shadow-2xl   outline-slate-400">
             <Terminal></Terminal>
           </div>
         </div>
         </div>
       </div>
+    </div>
     </div>
     </>
   );

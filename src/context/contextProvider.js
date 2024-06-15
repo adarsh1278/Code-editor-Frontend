@@ -8,7 +8,7 @@ export const MyContext = createContext();
 
 // Create a provider component
 export const MyProvider = ({ children }) => {
-  const [file, setFile] = useState("initial value");
+  const [file, setFile] = useState(null);
 
   return (
     <MyContext.Provider value={{ file, setFile }}>
