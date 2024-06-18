@@ -13,7 +13,13 @@ const Terminal = () => {
     isRendered.current = true;
 
     const term = new XTerminal({
-      rows: 20,
+      theme: {
+        background: '#020E2E', // Set background to blue
+        foreground: '#F4F4ED', // Set text color to white
+        cursor: '#FFFFFF',     // Set cursor color to red
+        selection: '#888888',  // Set selection color
+      },
+      rows: 14,
     });
 
     term.open(terminalRef.current);
@@ -29,7 +35,7 @@ const Terminal = () => {
     socket.on("terminal:data", onTerminalData);
   }, []);
 
-  return <div ref={terminalRef} id="terminal" />;
+  return <div   ref={terminalRef} id="terminal" />;
 };
 
 export default Terminal;

@@ -152,7 +152,7 @@ const Folder = ({
     );
   } else {
     return (
-      <div className="folder">
+      <div className="  folder">
         <span onClick={()=>{
             setFile(explorerData.path)
             console.log(file)

@@ -3,8 +3,7 @@
 @tailwind utilities;
 body {
   font-family: sans-serif;
-  margin: 0;
-  padding: 0;
+ padding: 0;
 }
 
 * {
@@ -18,7 +17,7 @@ body {
 }
 
 .empty-state {
-  margin: 5px;
+  
   display: flex;
   height: calc(100vh - 10px);
   align-items: center;
@@ -45,13 +44,14 @@ body {
 }
 
 .folder {
-  background-color: #393E41;
+  
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 5px 3px;
-  width: 300px;
+  padding: 2px 3px;
+  width: 200px;
   position: relative;
+ 
 }
 
 .folder>span {
@@ -69,16 +69,16 @@ button {
 
 .folder>span>label {
   display: inline-block;
-  margin: 3px 5px;
+  
   position: absolute;
   top: 2px;
 }
 
 .addItem {
-  background-color: #393E41;
-  align-items: center;
+  
+  align-items: start;
   padding: 5px 3px;
-  width: 300px;
+  width: 200px;
   position: relative;
 }
 
@@ -94,6 +94,6 @@ button {
 }
 
 .folder>span>input {
-  width: 75%;
-  margin-left: 5px;
+  width: 55%;
+  
 }

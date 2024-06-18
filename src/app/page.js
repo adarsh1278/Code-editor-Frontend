@@ -10,6 +10,7 @@ import "ace-builds/src-noconflict/mode-javascript";
 import "ace-builds/src-noconflict/theme-github";
 import "ace-builds/src-noconflict/ext-language_tools";
 import { MyContext } from "@/context/contextProvider";
+import { VscFile } from "react-icons/vsc";
 function App() {
   //context
   const [flagwrite ,setFlagwrite] = useState(true)
@@ -173,22 +174,22 @@ function App() {
     //   </div>
     // </div>
     <>
-    <div className=" p-6  bg-zinc-600">
-     <div className="App">
-      <div className="folderContainerBody">
-        <div className="folder-container">
-          <Folder
+    <div className=" h-screen w-screen bg-slate-400">
+
+      <div className=" flex flex-row">
+        <div className=" bg-slate-900 w-1/6 h-screen   p-3 " >
+        <Folder
+       
             handleInsertNode={handleInsertNode}
             handleDeleteNode={handleDeleteNode}
             handleUpdateFolder={handleUpdateFolder}
             explorerData={explorerData}
           />
         </div>
-        <div className="empty-state bg-white text-blue-500">
-        <div className=" w-full flex flex-col min-h-screen ">
-        
-       <div className="  p-5 bg-red-400 m-0">
-       <AceEditor 
+        <div className="bg-blue-600 w-full h-screen flex flex-col">
+        <div className=" h-10  w-full  p-3 bg-gray-800  text-yellow-50 font-extrabold font-serif"><VscFile/><span className=" pb-3 ml-3">{file? file:"pls select a file"}</span></div>
+        <div className=" bg-slate-300 h-fit w-fit">
+        <AceEditor 
        readOnly={flagwrite}
         mode="js"
          value={code}
@@ -198,15 +199,14 @@ function App() {
         theme="solarized dark"
          editorProps={{ $blockScrolling: true }}
           onChange={(e) => setCode(e)} />
-       </div>
-         
-          <div className=" drop-shadow-2xl shadow-2xl   outline-slate-400">
-            <Terminal></Terminal>
-          </div>
+       
+        </div>
+        <div  className=" h-full w-full">
+        <Terminal/>
         </div>
         </div>
       </div>
-    </div>
+
     </div>
     </>
   );
